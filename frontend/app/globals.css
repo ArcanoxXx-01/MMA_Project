@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos globales personalizados */
+body {
+  @apply bg-gray-100 text-gray-800; /* Fondo gris claro y texto oscuro */
+  font-family: "Inter", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  @apply font-bold;
+}
+/* Ocultar el indicador de ruta estática en desarrollo */
+.nextjs-toast-route {
+  display: none !important;
+}
+/* Clase personalizada para botones */
+.succsess-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: #232531; /* Fondo */
+  padding: 0.5rem 1rem;
+  color: #fff; /* Texto */
+  gap: 0.5rem;
+}
+
+.fondo{
+  @apply bg-[url('http://localhost:3000/images/claro3.jpg')] dark:bg-[url('http://localhost:3000/images/oscuro2.jpg')] bg-cover bg-no-repeat bg-center bg-fixed
+}
+
+.shadow{
+  @apply shadow-xl hover:shadow-2xl  shadow-black
+}
+
+.common{
+  @apply rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white text-gray-800 p-2
+}
+
+.category{
+  @apply text-sm text-gray-500 italic mx-2
+}
+
+.selector{
+  @apply px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+}
+
+.styleInput{
+  @apply w-full px-3 py-2 common 
+}
+
+.card{
+  @apply p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md m-4 hover:shadow-lg transition-all max-h-40 overflow-y-auto
+}
+
+.tittlePage{
+  @apply text-4xl font-extrabold text-black dark:text-white
+}
+
+.tittle{
+  @apply text-gray-800 dark:text-white
+}
+
+.subtittle{
+  @apply block text-gray-700 dark:text-gray-300 mb-1
+}
+
+.button{
+  @apply px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded hover:bg-gray-200 dark:hover:bg-gray-600 disabled:opacity-50
+}
