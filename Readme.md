@@ -1,13 +1,12 @@
 # MMA Project – Evaluador Automático de Respuestas Académicas
 
-Este proyecto es una aplicación web diseñada para ayudar a profesores a evaluar automáticamente respuestas de estudiantes usando modelos de lenguaje de Fireworks.ai.
+Este proyecto es una aplicación web diseñada para ayudar a profesores a evaluar automáticamente respuestas de estudiantes usando modelos de lenguaje de [Fireworks.ai](https://nextjs.org/).
 
 ## ✨ Características
 
 - Gestión de problemas académicos con metadatos (tema, tipo, criterio, créditos…).
-- Evaluación automática de respuestas usando LLMs vía Fireworks.ai.
-- Interfaz moderna con filtros, modo oscuro, y paginación.
-- Arquitectura desacoplada: Frontend (Next.js) + Backend (Flask).
+- Evaluación automática de respuestas usando LLMs vía [Fireworks.ai](https://nextjs.org/)
+- Arquitectura desacoplada: Frontend ([Next.js](https://nextjs.org/)) + Backend ([Flask](https://flask.palletsprojects.com/)).
 
 ---
 
@@ -22,17 +21,17 @@ Este proyecto es una aplicación web diseñada para ayudar a profesores a evalua
 - [Flask](https://flask.palletsprojects.com/)
 - Flask-SQLAlchemy
 - Flask-Migrate
-- Fireworks API
+- [Fireworks API](https://nextjs.org/)
 - Python 3.12+
 
 ---
 
-## ⚙️ Instalación
+## ⚙️ Instalación (ejemplo en Linux-Ubuntu)
 
 ### 1. Clona el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/MMA_Project.git
+git clone https://github.com/ArcanoxXx-01/MMA_Project.git
 cd MMA_Project/backend
 ```
 
@@ -47,7 +46,7 @@ pip install -r requirements.txt
 Configura las variables de entorno en un archivo .env:
 
 ```bash
-FIREWORKS_API_KEY=sk-tu-api-key
+FIREWORKS_API_KEY="sk-tu-api-key"
 ```
 
 Ejecuta la app:
@@ -89,9 +88,14 @@ MMA_Project/
 │   │   └── problems/
 │   │       ├── [id]/page.tsx
 │   │       └── create/page.tsx
-│   ├── components/
-│   │   └── ProblemFilters.tsx
-│   └── tailwind.config.ts
+|   ├── public/images/
+|   ├── src/
+│   |   ├── api/
+|   |   ├── components/
+│   │   └── types/
+|   ├── package.json
+|   ├── ...
+│   └── tsconfig.json
 └── README.md
 
 ```
@@ -135,7 +139,7 @@ Puedes usar un script seed.py en el backend para poblar la base de datos con eje
 
 ## 🧑‍💻 Autor
 
-Darío López Falcón— estudiante de Ciencias de la Computación de la Universidad de La Habana
+Darío López Falcón — estudiante de Ciencias de la Computación de la Universidad de La Habana
 
 ## 📄 Licencia
 
