@@ -14,7 +14,7 @@ payload = {
   "top_k": 40,
   "presence_penalty": 0,
   "frequency_penalty": 0,
-  "temperature": 0.6,
+  "temperature": 0.7,
   "messages": [
     {
       "role": "user",

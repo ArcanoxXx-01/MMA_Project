@@ -1,4 +1,3 @@
-# backend/app/llm/base.py
 import abc
 from typing import Any, Dict
 

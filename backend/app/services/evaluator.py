@@ -1,4 +1,3 @@
-# backend/app/services/evaluator.py
 from flask import current_app
 from app.llm.fireworks_models import FireworksModel
 from app.llm.prompts import EVALUATION_TEMPLATE, DEFAULT_PARAMS

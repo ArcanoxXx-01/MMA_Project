@@ -1,4 +1,3 @@
-# backend/app/models/problem.py
 from . import db
 from datetime import datetime
 

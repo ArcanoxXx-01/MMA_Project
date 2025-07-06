@@ -39,7 +39,7 @@ export default function HomePage() {
     <main className="max-w-6xl mx-auto p-6 space-y-6">
       <header className="space-y-2">
         <h1 className="text-4xl font-extrabold text-gray-800 dark:text-gray-100">Problemas Académicos 🤌🏻</h1>
-        <p className="text-gray-600 dark:text-gray-400">Filtra, busca y navega tus desafíos.</p>
+        {/* <p className="text-gray-600 dark:text-gray-400">Filtra, busca y navega tus desafíos.</p> */}
       </header>
 
       <div className="grid md:grid-cols-3 gap-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
