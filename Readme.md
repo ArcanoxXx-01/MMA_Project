@@ -65,19 +65,6 @@ La evaluación automática se realiza a través de un LLM instructivo (modelo ch
 
 ---
 
-## 🧠 Justificación de herramientas
-
-| Herramienta         | Razón de uso                                                                 |
-|---------------------|------------------------------------------------------------------------------|
-| **Flask**           | Microframework simple, ideal para construir APIs RESTful rápidamente.        |
-| **SQLAlchemy**      | ORM robusto para mantener independencia de la base de datos.                 |
-| **Fireworks.ai**    | Proveedor de LLMs con buena calidad y facilidad de uso.                      |
-| **Next.js**         | Framework moderno de React con SSR/SSG, ideal para apps rápidas y SEO ready. |
-| **TailwindCSS**     | Permite diseñar interfaces limpias y responsivas sin salir del HTML.         |
-| **TypeScript**      | Mejora la mantenibilidad del frontend mediante tipado estático.              |
-
----
-
 ## ⚙️ Instalación (ejemplo en Linux-Ubuntu)
 
 ### 1. Clona el repositorio
