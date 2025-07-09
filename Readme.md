@@ -1,14 +1,32 @@
 # MMA Project – Evaluador Automático de Respuestas Académicas
 
-Este proyecto es una aplicación web diseñada para ayudar a profesores a evaluar automáticamente respuestas de estudiantes usando modelos de lenguaje de [Fireworks.ai](https://nextjs.org/).
+## 🧩 Definición del problema a resolver
 
-## ✨ Características
+El proyecto busca facilitar la evaluación de respuestas académicas abiertas (por ejemplo, preguntas teóricas o conceptuales) que tradicionalmente requieren tiempo y criterio subjetivo por parte de los profesores. Los objetivos principales son:
 
-- Gestión de problemas académicos con metadatos (tema, tipo, criterio, créditos…).
-- Evaluación automática de respuestas usando LLMs vía [Fireworks.ai](https://nextjs.org/)
-- Arquitectura desacoplada: Frontend ([Next.js](https://nextjs.org/)) + Backend ([Flask](https://flask.palletsprojects.com/)).
+- Reducir la carga de trabajo en la corrección de respuestas escritas.
+- Aumentar la objetividad y consistencia en las evaluaciones.
+- Ofrecer retroalimentación automática y rápida al estudiante.
 
 ---
+
+### 💡 Propuesta de solución
+
+Se diseñó una aplicación web dividida en dos módulos principales:
+
+1. **Backend** que gestiona problemas académicos y usa modelos de lenguaje (LLMs) para evaluar las respuestas.
+2. **Frontend** que permite a los usuarios (profesores) gestionar preguntas, filtrar por criterios, y visualizar resultados.
+
+La evaluación automática se realiza a través de un LLM instructivo (modelo chat) de Fireworks.ai, con prompts diseñados para evaluar la respuesta del estudiante en base al tema, tipo de pregunta, solución esperada y criterios de evaluación.
+
+---
+
+<!-- ## ✨ Características
+
+**El sistema se desarrollo principalmente para**:
+
+- Gestionar problemas académicos con metadatos (tema, tipo, criterio, créditos…) # Con gestionar nos referimos a crear, guardar, editar, etc...
+- Evaluación automática de respuestas usando LLMs. # Usando los metadatos de los problemas como parte del contexto y las respuestas de los estudiantes se formula un prompt para que un LLM genere una evaluacion, la cual incluye una nota de 0 a 100, y una explicacion en caso de ser necesaria. -->
 
 ## 🧠 Tecnologías
 
@@ -18,6 +36,8 @@ Este proyecto es una aplicación web diseñada para ayudar a profesores a evalua
 - TypeScript
 - TailwindCSS
 
+> Estas tecnologías fueron seleccionadas por su eficiencia en el desarrollo de interfaces modernas, su ecosistema bien integrado y la posibilidad de desplegar fácilmente la aplicación de forma gratuita en plataformas como [Vercel](https://vercel.com/).
+
 ### 🧪 Backend
 
 - [Flask](https://flask.palletsprojects.com/)
@@ -25,6 +45,36 @@ Este proyecto es una aplicación web diseñada para ayudar a profesores a evalua
 - Flask-Migrate
 - [Fireworks API](https://nextjs.org/)
 - Python 3.12+
+
+> Se optó por estas herramientas debido a su simplicidad, rapidez de desarrollo y bajo overhead, ideales para un backend ligero centrado en una única funcionalidad principal: evaluar respuestas mediante LLMs.
+
+---
+
+## 🧠 Justificación de herramientas
+
+| Herramienta         | Razón de uso                                                                 |
+|---------------------|------------------------------------------------------------------------------|
+| **Flask**           | Microframework simple, ideal para construir APIs RESTful rápidamente.        |
+| **SQLAlchemy**      | ORM robusto para mantener independencia de la base de datos.                 |
+| **Fireworks.ai**    | Proveedor de LLMs con buena calidad y facilidad de uso.                      |
+| **Next.js**         | Framework moderno de React con SSR/SSG, ideal para apps rápidas y SEO ready. |
+| **TailwindCSS**     | Permite diseñar interfaces limpias y responsivas sin salir del HTML.         |
+| **TypeScript**      | Mejora la mantenibilidad del frontend mediante tipado estático.              |
+
+> Se optó por estas herramientas debido a su simplicidad, rapidez de desarrollo y bajo overhead, ideales para un backend ligero centrado en una única funcionalidad principal: evaluar respuestas mediante LLMs.
+
+---
+
+## 🧠 Justificación de herramientas
+
+| Herramienta         | Razón de uso                                                                 |
+|---------------------|------------------------------------------------------------------------------|
+| **Flask**           | Microframework simple, ideal para construir APIs RESTful rápidamente.        |
+| **SQLAlchemy**      | ORM robusto para mantener independencia de la base de datos.                 |
+| **Fireworks.ai**    | Proveedor de LLMs con buena calidad y facilidad de uso.                      |
+| **Next.js**         | Framework moderno de React con SSR/SSG, ideal para apps rápidas y SEO ready. |
+| **TailwindCSS**     | Permite diseñar interfaces limpias y responsivas sin salir del HTML.         |
+| **TypeScript**      | Mejora la mantenibilidad del frontend mediante tipado estático.              |
 
 ---
 
@@ -48,7 +98,7 @@ pip install -r requirements.txt
 Configura las variables de entorno en un archivo .env:
 
 ```bash
-FIREWORKS_API_KEY="sk-tu-api-key"
+FIREWORKS_API_KEY=tu-api-key
 ```
 
 Ejecuta la app:
@@ -61,6 +111,8 @@ La API se levantará en <http://localhost:5000>.
 
 ### 3. Configura el Frontend
 
+*duplica la terminal, y en la nueva ejecuta los siguientes comandos:
+
 ```bash
 cd ../frontend
 npm install
@@ -70,6 +122,8 @@ npm run dev
 La app estará disponible en <http://localhost:3000>.
 
     Asegúrate de que el backend está corriendo en el puerto 5000 para que las peticiones funcionen correctamente.
+
+---
 
 ## 🔍 Estructura del proyecto
 
@@ -99,33 +153,9 @@ MMA_Project/
 |   ├── ...
 │   └── tsconfig.json
 └── README.md
-
 ```
 
-## 🧪 Evaluación con Fireworks.ai
-
-La app se comunica con modelos LLM usando la API de Fireworks:
-
-- El backend prepara un prompt detallado con:
-
-  - Tema
-
-  - Tipo de pregunta
-
-  - Solución esperada
-
-  - Respuesta del estudiante
-
-  - Criterio de evaluación
-
-- El modelo devuelve un razonamiento y una puntuación.
-
-**Puedes ver o modificar el prompt en:**
-`backend/app/llm/prompts.py`
-
-## 📥 Poblado de la base de datos (opcional)
-
-Puedes usar un script seed.py en el backend para poblar la base de datos con ejemplos. Asegúrate de que esté dentro del contexto de aplicación.
+---
 
 ## 📐 Arquitectura y Diseño
 
@@ -139,39 +169,89 @@ La aplicación sigue una arquitectura **desacoplada**, separando frontend y back
 
 El backend no se comunica directamente con la API de Fireworks.ai, sino a través de una **interfaz abstracta `BaseLLM`**, lo que permite:
 
-- Sustituir Fireworks por otro proveedor (ej. OpenAI, Cohere) sin afectar el resto del código.
+- Sustituir Fireworks por otro proveedor (ej. OpenAI, Cohere, Mistral...) sin afectar el resto del código.
 - Mantener una estructura uniforme para operaciones como `generate()` y `evaluate()`.
+- Aislar detalles de implementación, lo que facilita pruebas, mantenibilidad y futura extensibilidad.
 
 Actualmente, la clase `FireworksModel` implementa esta interfaz usando modelos **instructivos tipo chat**, ideales para tareas de evaluación textual guiadas por prompt.
 
 ---
 
-## 🧠 Justificación de herramientas
+## 🧪 Evaluación con Fireworks.ai
 
-| Herramienta         | Razón de uso                                                                 |
-|---------------------|------------------------------------------------------------------------------|
-| **Flask**           | Microframework simple, ideal para construir APIs RESTful rápidamente.        |
-| **SQLAlchemy**      | ORM robusto para mantener independencia de la base de datos.                 |
-| **Fireworks.ai**    | Proveedor de LLMs con buena calidad y facilidad de uso.                      |
-| **Next.js**         | Framework moderno de React con SSR/SSG, ideal para apps rápidas y SEO ready. |
-| **TailwindCSS**     | Permite diseñar interfaces limpias y responsivas sin salir del HTML.         |
-| **TypeScript**      | Mejora la mantenibilidad del frontend mediante tipado estático.              |
+La app se comunica con modelos LLM usando la API de Fireworks:
 
-## ✍️ Contribuciones
+- El backend prepara un prompt detallado con:
 
-¡Se aceptan contribuciones! Puedes:
+  - Tema
+  - Tipo de pregunta
+  - Solución esperada
+  - Respuesta del estudiante
+  - Criterio de evaluación
 
-- Agregar tipos de problemas nuevos
+- El modelo devuelve un razonamiento y una puntuación.
 
-- Implementar soporte para múltiples LLMs
+**Puedes ver o modificar el prompt en:**
+`backend/app/llm/prompts.py`
 
-- Mejorar el sistema de feedback visual
+---
 
-- Agregar exportación de resultados o historial
+## 📥 Poblado de la base de datos (opcional)
+
+Puedes usar un script `seed.py` en el backend para poblar la base de datos con ejemplos. Asegúrate de que esté dentro del contexto de aplicación.
+
+---
+
+## 📊 Análisis del Proyecto
+
+### ✅ Lo que funcionó
+
+- La **arquitectura desacoplada** entre frontend y backend facilitó el desarrollo modular, permitiendo trabajar de forma independiente y simplificando el despliegue y la mantenibilidad.
+- El uso de una **interfaz abstracta (`BaseLLM`)** para la comunicación con modelos de lenguaje demostró ser una decisión acertada.
+- El sistema **evalúa correctamente preguntas de tipo opción múltiple y verdadero/falso**, ya que estas no requieren razonamiento profundo.
+- La interfaz web es intuitiva y funcional, con filtros, paginación y modo oscuro, lo que mejora la experiencia del usuario.
+
+---
+
+### ❌ Lo que no funcionó (aún)
+
+- Actualmente, el sistema **no guarda las evaluaciones generadas** por el modelo, lo que impide hacer trazabilidad, validaciones cruzadas o análisis posterior.
+- **Las preguntas abiertas** (ej. justificar, explicar, demostrar) no siempre son bien evaluadas por el modelo.
+- No se realizó comparación sistemática entre la evaluación automática y la evaluación humana.
+- No se implementó un sistema de colas o tareas en segundo plano, lo cual puede afectar el rendimiento si se escalan las peticiones de evaluación.
+
+---
+
+## 🛠️ Contribuciones y Futuro del Proyecto
+
+Este proyecto está en evolución constante y hay múltiples formas de contribuir o ampliarlo:
+
+### 🔧 Mejoras recomendadas
+
+- **Persistencia de evaluaciones**: guardar los resultados generados por el modelo para permitir trazabilidad y análisis estadístico.
+- **Historial por estudiante y por problema**: para observar la evolución individual y validar el comportamiento del modelo.
+- **Afinar los prompts**: utilizando ejemplos (few-shot) y validación con respuestas reales para mejorar la calidad de las evaluaciones.
+- **Agregar autenticación y control de acceso**: para gestionar roles de profesores, administradores o instituciones.
+- **Soporte para múltiples modelos**: integrar fácilmente otros proveedores (OpenAI, Cohere, Mistral…) usando la interfaz `BaseLLM`.
+- **Exportación y visualización de resultados**: generar reportes en PDF, Excel u otros formatos para seguimiento académico.
+- **Implementar feedback visual**: mostrar de forma clara al usuario el razonamiento del modelo, su puntuación y sugerencias.
+
+### 🤝 Cómo contribuir
+
+¡Tu ayuda es bienvenida! Algunas formas de colaborar:
+
+- Agregar nuevos tipos de problemas y criterios de evaluación.
+- Mejorar la interfaz web o la experiencia de usuario.
+- Optimizar el rendimiento o refactorizar componentes.
+- Proponer nuevas funcionalidades o integraciones.
+
+---
 
 ## 🧑‍💻 Autor
 
 Darío López Falcón — estudiante de Ciencias de la Computación de la Universidad de La Habana
+
+---
 
 ## 📄 Licencia
 
