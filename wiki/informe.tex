@@ -1,0 +1,202 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem} 
+
+\definecolor{lightgray}{gray}{0.95}
+\lstset{
+  backgroundcolor=\color{lightgray},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true
+}
+
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection.}{1em}{}
+
+\title{Informe Técnico\\ \large EVA – Evaluador Virtual Académico}
+\author{Darío López Falcón\\\\Facultad de Matemática y Computación (MATCOM)\\Universidad de La Habana}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Resumen}
+Este proyecto tiene como objetivo automatizar la evaluación de respuestas académicas abiertas mediante modelos de lenguaje (LLMs), reduciendo la carga de trabajo docente y mejorando la objetividad.\\
+\noindent\hspace*{1em}Se diseñó una aplicación web compuesta por un backend en Flask y un frontend en Next.js.\\
+\noindent\hspace*{1em}La evaluación se realiza a través de prompts personalizados enviados a modelos de lenguaje de Fireworks.ai.\\
+\noindent\hspace*{1em}El sistema permite a los profesores gestionar preguntas, ver resultados y obtener retroalimentación automática.\\
+\noindent\hspace*{1em}A pesar de su efectividad en preguntas cerradas, presenta desafíos en preguntas abiertas que requieren razonamiento complejo.
+
+\section*{Objetivos}
+\textbf{Objetivo general:}
+\begin{itemize}
+  \item Automatizar la evaluación de respuestas escritas utilizando modelos de lenguaje.
+\end{itemize}
+
+\textbf{Objetivos específicos:}
+\begin{itemize}
+  \item Disminuir el tiempo de corrección de respuestas abiertas.
+  \item Garantizar consistencia y objetividad en las calificaciones.
+  \item Proporcionar retroalimentación automática a los estudiantes.
+  \item Diseñar un sistema modular, extensible y fácil de desplegar.
+\end{itemize}
+
+\section{Definición del problema}
+La corrección de respuestas abiertas suele ser lenta, subjetiva y difícil de estandarizar. Este proyecto busca una solución automatizada que mantenga coherencia en las calificaciones, permita escalabilidad y ofrezca retroalimentación inmediata al estudiante.
+
+\section{Propuesta de solución}
+Se desarrolló una aplicación web con dos módulos principales:
+\begin{enumerate}
+  \item \textbf{Backend:} construido con Flask, se encarga de la evaluación automática mediante un modelo LLM y gestiona los datos.
+  \item \textbf{Frontend:} desarrollado con Next.js y TailwindCSS, permite a los docentes crear preguntas, filtrar resultados y visualizar evaluaciones.
+\end{enumerate}
+
+\section{Tecnologías utilizadas}
+\subsection*{Frontend}
+\begin{itemize}
+  \item Next.js (React + SSR)
+  \item TailwindCSS
+  \item TypeScript
+\end{itemize}
+
+\subsection*{Backend}
+\begin{itemize}
+  \item Flask + SQLAlchemy + Flask-Migrate
+  \item Python 3.12+
+  \item API de Fireworks.ai
+\end{itemize}
+
+\section{Justificación de herramientas}
+Las tecnologías fueron seleccionadas por su eficiencia, comunidad activa y facilidad de integración. Flask ofrece una solución ligera para APIs; Next.js permite crear interfaces rápidas y modernas; Fireworks.ai provee LLMs de alta calidad.
+
+\section{Requisitos del sistema}
+\textbf{Requisitos técnicos:}
+\begin{itemize}
+  \item Python 3.12+, Node.js, navegador moderno
+  \item Conexión a internet y clave de API para Fireworks.ai
+\end{itemize}
+
+\textbf{Requisitos funcionales:}
+\begin{itemize}
+  \item Crear, editar y evaluar preguntas académicas
+  \item Filtrar resultados, visualizar puntuaciones y retroalimentación
+\end{itemize}
+
+\section{Instalación y despliegue (Linux)}
+\textbf{Backend:}
+\begin{lstlisting}[language=bash]
+git clone https://github.com/ArcanoxXx-01/EVA.git
+cd EVA/backend
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+echo FIREWORKS_API_KEY=tu-api-key > .env
+python run.py
+\end{lstlisting}
+
+\textbf{Frontend:}
+\begin{lstlisting}[language=bash]
+cd ../frontend
+npm install
+npm run dev
+\end{lstlisting}
+
+\section{Estructura del proyecto}
+
+La estructura básica del proyecto se organiza de la siguiente manera:
+
+\begin{itemize}
+  \item \texttt{EVA/}
+  \begin{itemize}
+    \item \texttt{backend/}
+    \begin{itemize}
+      \item \texttt{app/} \quad (contiene \texttt{models}, \texttt{routes}, \texttt{services}, \texttt{llm})
+      \item \texttt{run.py}
+      \item \texttt{requirements.txt}
+    \end{itemize}
+    \item \texttt{frontend/}
+    \begin{itemize}
+      \item \texttt{app/}, \texttt{public/}, \texttt{src/}
+      \item \texttt{package.json}, \texttt{tsconfig.json}, etc.
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\section{Diseño y arquitectura}
+La aplicación sigue una arquitectura desacoplada. El backend se comunica con el modelo LLM a través de una interfaz abstracta `BaseLLM', lo cual permite cambiar de proveedor fácilmente y mantener el sistema escalable y modular.
+
+\section{Evaluación automática con Fireworks.ai}
+El backend genera un prompt estructurado con:
+\begin{itemize}
+  \item Tema
+  \item Tipo de pregunta
+  \item Solución esperada
+  \item Respuesta del estudiante
+  \item Criterio de evaluación
+\end{itemize}
+El modelo devuelve una calificación numérica y una justificación textual.
+
+\section{Pruebas y validación}
+Las pruebas se centraron en:
+\begin{itemize}
+  \item Preguntas de opción múltiple y verdadero/falso, con alta precisión en la evaluación.
+  \item Verificación del correcto armado de prompts y retorno esperado del modelo.
+  \item Validación funcional del frontend (filtros, navegación, modo oscuro).
+\end{itemize}
+% No se realizó validación cuantitativa entre la evaluación automática y la humana (pendiente).
+
+\section{Análisis del proyecto}
+\subsection*{Fortalezas}
+\begin{itemize}
+  \item Arquitectura modular y desacoplada.
+  \item Evaluación funcional de tipos de preguntas cerradas.
+  \item Interfaz moderna e intuitiva.
+\end{itemize}
+
+\subsection*{Limitaciones}
+\begin{itemize}
+  \item No se persisten las evaluaciones generadas.
+  \item Desempeño variable en preguntas abiertas.
+  \item Ausencia de comparación sistemática con evaluadores humanos.
+\end{itemize}
+
+\section{Trabajos a futuro}
+
+A partir del desarrollo actual del sistema, se identifican múltiples líneas de trabajo que permitirían ampliar su funcionalidad, robustez y utilidad en entornos reales:
+
+\begin{itemize}
+  \item \textbf{Persistencia de evaluaciones:} actualmente las respuestas generadas por el modelo no se almacenan. Guardar estos datos permitiría análisis estadísticos, validación posterior y trazabilidad de evaluaciones.
+  
+  \item \textbf{Historial por estudiante y problema:} agregar una funcionalidad que almacene los resultados de cada intento por estudiante ayudaría a monitorear la evolución del aprendizaje y detectar inconsistencias o mejoras.
+
+  \item \textbf{Refinamiento del prompt:} mejorar el diseño del prompt utilizado con el modelo, empleando estrategias como few-shot learning, ejemplos concretos o ajuste dinámico según el tipo de pregunta.
+
+  \item \textbf{Autenticación y roles de usuario:} implementar un sistema de inicio de sesión con permisos diferenciados (docente, administrador, etc.) para mejorar la seguridad y escalabilidad del sistema.
+
+  \item \textbf{Soporte para múltiples modelos:} permitir el uso de distintos proveedores de LLMs (OpenAI, Cohere, Mistral...) usando la interfaz común ya existente (`BaseLLM`), de modo que el sistema sea más flexible y se puedan comparar diferentes motores de evaluación.
+
+  \item \textbf{Visualización y exportación de resultados:} incluir reportes automáticos en PDF, Excel o gráficos de rendimiento por estudiante, problema o criterio de evaluación.
+
+  \item \textbf{Feedback visual:} mostrar claramente el razonamiento generado por el modelo, indicando por qué una respuesta fue considerada correcta o incorrecta, lo que facilita la comprensión del estudiante.
+
+  \item \textbf{Comparación con evaluaciones humanas:} realizar estudios de correlación entre evaluaciones hechas por el sistema y docentes reales, lo cual permitiría medir la precisión y confiabilidad del sistema en distintos contextos.
+
+  \item \textbf{Uso de técnicas avanzadas de IA:} explorar el uso de \textit{fine-tuning} sobre modelos base o técnicas de \textit{retrieval-augmented generation} (RAG) para mejorar la calidad de las evaluaciones, especialmente en preguntas abiertas.
+
+  \item \textbf{Sistema de colas y tareas asíncronas:} implementar una arquitectura con workers y procesamiento en segundo plano (por ejemplo, usando Celery o RQ) para manejar grandes volúmenes de evaluaciones sin afectar el rendimiento del servidor.
+\end{itemize}
+
+\section{Conclusiones}
+El proyecto demuestra que es posible automatizar la evaluación académica con modelos LLM de forma efectiva en preguntas cerradas. La arquitectura desacoplada y el uso de una interfaz común para LLMs hacen que el sistema sea mantenible y extensible. Como trabajo futuro se propone mejorar la persistencia, refinar los prompts, y validar más rigurosamente la calidad de las respuestas del modelo.
+
+\section*{Licencia}
+Este proyecto está licenciado bajo la \textbf{MIT License}.
+
+\end{document}

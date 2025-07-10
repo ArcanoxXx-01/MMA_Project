@@ -1,4 +1,4 @@
-# MMA Project – Evaluador Automático de Respuestas Académicas
+# EVA – Evaluador Virtual Académico
 
 ## 🧩 Definición del problema a resolver
 
@@ -70,8 +70,8 @@ La evaluación automática se realiza a través de un LLM instructivo (modelo ch
 ### 1. Clona el repositorio
 
 ```bash
-git clone https://github.com/ArcanoxXx-01/MMA_Project.git
-cd MMA_Project/backend
+git clone https://github.com/ArcanoxXx-01/EVA.git
+cd EVA/backend
 ```
 
 ### 2. Configura el Backend
@@ -108,14 +108,16 @@ npm run dev
 
 La app estará disponible en <http://localhost:3000>.
 
-    Asegúrate de que el backend está corriendo en el puerto 5000 para que las peticiones funcionen correctamente.
+```txt
+Asegúrate de que el backend está corriendo en el puerto 5000 para que las peticiones funcionen correctamente.
+```
 
 ---
 
 ## 🔍 Estructura del proyecto
 
 ```bash
-MMA_Project/
+EVA/
 ├── backend/
 │   ├── app/
 │   │   ├── models/
