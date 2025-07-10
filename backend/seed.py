@@ -1,5 +1,3 @@
-# seed.py
-
 from app import create_app
 from app.models import db
 from app.models.problem import Problem
@@ -7,6 +5,7 @@ from app.models.problem import Problem
 app = create_app()
 
 with app.app_context():
+    
     # Borrar y crear tablas (solo para desarrollo)
     db.drop_all()
     db.create_all()

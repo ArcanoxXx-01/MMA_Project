@@ -1,4 +1,3 @@
-# backend/app/utils/helpers.py
 import re
 
 def normalize_text(text: str) -> str:

@@ -1,4 +1,3 @@
-# backend/tests/test_problems.py
 import pytest
 from app import create_app
 from app.models import db, Problem
